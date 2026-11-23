@@ -24,13 +24,12 @@ projects:[['AgroNexus','Technology','Platform connecting farmers with buyers, su
 const ph=(src,label)=>`<div class="ph"><img src="${src}" alt="${label}" loading="lazy" onerror="this.remove()"><span><b>IMAGE PLACEHOLDER</b>${src}</span></div>`;
 const tbl=(el,head,rows)=>{$(el).innerHTML=(head?`<tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr>`:'')+rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')};
 function header(){
- $('#site-header').innerHTML=`<div class="header-inner"><a class="brand" href="#home"><div class="logo"><img src="assets/branding/candidate.png" alt="Candidate logo" onerror="this.parentElement.style.display='none'"></div><div class="logo"><img src="assets/branding/ui.png" alt="University of Ibadan" onerror="this.parentElement.style.display='none'"></div><div class="logo"><img src="assets/branding/enactus.png" alt="Enactus" onerror="this.parentElement.style.display='none'"></div><span class="wordmark">ENACTUS&nbsp; RE:ENGINEERED</span></a><nav class="nav">${nav.slice(1,9).map(([n,u])=>`<a href="${u}">${n}</a>`).join('')}</nav><div class="header-actions"><button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode"><span>☀</span><span>☾</span><i></i></button><button class="menu-trigger" id="menuTrigger">MENU</button></div></div>`;
+ $('#site-header').innerHTML=`<div class="header-inner"><a class="brand" href="#home"><div class="logo"><img src="assets/branding/candidate.png" alt="Candidate logo" onerror="this.parentElement.style.display='none'"></div><div class="logo"><img src="assets/branding/ui.png" alt="University of Ibadan" onerror="this.parentElement.style.display='none'"></div><div class="logo"><img src="assets/branding/enactus.png" alt="Enactus" onerror="this.parentElement.style.display='none'"></div><span class="wordmark">ENACTUS&nbsp; RE:ENGINEERED</span></a><nav class="nav">${nav.slice(1,9).map(([n,u])=>`<a href="${u}">${n}</a>`).join('')}</nav><div class="header-actions"><button class="menu-trigger" id="menuTrigger">MENU</button></div></div>`;
  const m=document.createElement('div');m.className='full-menu';m.innerHTML=`<button class="close-menu" id="closeMenu">×</button><div class="full-menu-inner"><div><div class="eyebrow">Enactus Re:Engineered</div><h2>Building Systems.</h2><nav>${nav.map(([n,u])=>`<a href="${u}">${n}</a>`).join('')}</nav></div><div><p class="lead">Transform the System. Empower the People. Deliver Measurable Impact.</p></div></div>`;
  document.body.appendChild(m);$('#menuTrigger').onclick=()=>m.classList.add('open');$('#closeMenu').onclick=()=>m.classList.remove('open');$$('a',m).forEach(a=>a.onclick=()=>m.classList.remove('open'));
  const fl=document.createElement('div');fl.className='floating-actions';fl.innerHTML=`<a class="floating-vote" href="#contact"><span class="vote-icon">✓</span><span><strong>BACK THE VISION</strong><small>Enactus Re:Engineered</small></span></a>`;document.body.appendChild(fl);
  $('#site-footer').innerHTML=`<div class="container footer-main"><div><p><strong>Enactus University of Ibadan</strong></p><p>Team Lead campaign. Building Systems. Empowering People. Creating Impact.</p></div><div><h4>Explore</h4><div class="footer-links">${nav.map(([n,u])=>`<a href="${u}">${n}</a>`).join('')}</div></div></div><div class="footer-bottom">© 2026 ${CFG.candidate||''}. All rights reserved.</div>`;
 }
-function theme(){const s=localStorage.getItem('en-theme');if(s)document.documentElement.dataset.theme=s;$('#themeToggle').onclick=()=>{const n=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=n;localStorage.setItem('en-theme',n)}}
 function content(){
  $$('[data-candidate]').forEach(e=>e.textContent=(CFG.candidate||'').toUpperCase());$$('[data-pdf]').forEach(e=>e.href=CFG.manifestoPdf||'#');
  $('#marquee').innerHTML=Array(2).fill(['SYSTEMS','PEOPLE','IMPACT','ACCOUNTABILITY','INNOVATION','LEGACY'].map(t=>`<div class="marquee-item">${t} <span>·</span></div>`).join('')).join('');
@@ -60,7 +59,7 @@ function motion(){
  $$('.reveal').forEach(e=>io.observe(e));
  const bp=$('#progress');addEventListener('scroll',()=>bp.style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%',{passive:true});
 }
-document.addEventListener('DOMContentLoaded',()=>{header();theme();content();motion()});
+document.addEventListener('DOMContentLoaded',()=>{header();content();motion()});
 
 
 addEventListener('beforeprint',()=>{$$('.reveal').forEach(e=>e.classList.add('visible'));$$('[data-h]').forEach(b=>b.style.height=b.dataset.h+'%');$$('[data-count]').forEach(n=>n.textContent=n.dataset.count)});
